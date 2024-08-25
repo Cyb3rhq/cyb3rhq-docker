@@ -1,74 +1,74 @@
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=wazuh-indexer-data-1 \
-           $2_wazuh-indexer-data-1
+           --label com.docker.compose.volume=cyb3rhq-indexer-data-1 \
+           $2_cyb3rhq-indexer-data-1
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=wazuh-indexer-data-2 \
-           $2_wazuh-indexer-data-2
+           --label com.docker.compose.volume=cyb3rhq-indexer-data-2 \
+           $2_cyb3rhq-indexer-data-2
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=wazuh-indexer-data-3 \
-           $2_wazuh-indexer-data-3
+           --label com.docker.compose.volume=cyb3rhq-indexer-data-3 \
+           $2_cyb3rhq-indexer-data-3
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master_wazuh_api_configuration \
-           $2_master_wazuh_api_configuration
+           --label com.docker.compose.volume=master_cyb3rhq_api_configuration \
+           $2_master_cyb3rhq_api_configuration
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master_wazuh_etc \
-           $2_docker_wazuh_etc
+           --label com.docker.compose.volume=master_cyb3rhq_etc \
+           $2_docker_cyb3rhq_etc
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-logs \
-           $2_master-wazuh-logs
+           --label com.docker.compose.volume=master-cyb3rhq-logs \
+           $2_master-cyb3rhq-logs
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-queue \
-           $2_master-wazuh-queue
+           --label com.docker.compose.volume=master-cyb3rhq-queue \
+           $2_master-cyb3rhq-queue
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-var-multigroups \
-           $2_master-wazuh-var-multigroups
+           --label com.docker.compose.volume=master-cyb3rhq-var-multigroups \
+           $2_master-cyb3rhq-var-multigroups
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-integrations \
-           $2_master-wazuh-integrations
+           --label com.docker.compose.volume=master-cyb3rhq-integrations \
+           $2_master-cyb3rhq-integrations
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-active-response \
-           $2_master-wazuh-active-response
+           --label com.docker.compose.volume=master-cyb3rhq-active-response \
+           $2_master-cyb3rhq-active-response
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-agentless \
-           $2_master-wazuh-agentless
+           --label com.docker.compose.volume=master-cyb3rhq-agentless \
+           $2_master-cyb3rhq-agentless
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=master-wazuh-wodles \
-           $2_master-wazuh-wodles
+           --label com.docker.compose.volume=master-cyb3rhq-wodles \
+           $2_master-cyb3rhq-wodles
 
 docker volume create \
            --label com.docker.compose.project=$2 \
@@ -85,56 +85,56 @@ docker volume create \
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker_wazuh_api_configuration \
-           $2_worker_wazuh_api_configuration
+           --label com.docker.compose.volume=worker_cyb3rhq_api_configuration \
+           $2_worker_cyb3rhq_api_configuration
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker_wazuh_etc \
-           $2_worker-wazuh-etc
+           --label com.docker.compose.volume=worker_cyb3rhq_etc \
+           $2_worker-cyb3rhq-etc
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-logs \
-           $2_worker-wazuh-logs
+           --label com.docker.compose.volume=worker-cyb3rhq-logs \
+           $2_worker-cyb3rhq-logs
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-queue \
-           $2_worker-wazuh-queue
+           --label com.docker.compose.volume=worker-cyb3rhq-queue \
+           $2_worker-cyb3rhq-queue
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-var-multigroups \
-           $2_worker-wazuh-var-multigroups
+           --label com.docker.compose.volume=worker-cyb3rhq-var-multigroups \
+           $2_worker-cyb3rhq-var-multigroups
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-integrations \
-           $2_worker-wazuh-integrations
+           --label com.docker.compose.volume=worker-cyb3rhq-integrations \
+           $2_worker-cyb3rhq-integrations
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-active-response \
-           $2_worker-wazuh-active-response
+           --label com.docker.compose.volume=worker-cyb3rhq-active-response \
+           $2_worker-cyb3rhq-active-response
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-agentless \
-           $2_worker-wazuh-agentless
+           --label com.docker.compose.volume=worker-cyb3rhq-agentless \
+           $2_worker-cyb3rhq-agentless
 
 docker volume create \
            --label com.docker.compose.project=$2 \
            --label com.docker.compose.version=$1 \
-           --label com.docker.compose.volume=worker-wazuh-wodles \
-           $2_worker-wazuh-wodles
+           --label com.docker.compose.volume=worker-cyb3rhq-wodles \
+           $2_worker-cyb3rhq-wodles
 
 docker volume create \
            --label com.docker.compose.project=$2 \
@@ -149,131 +149,131 @@ docker volume create \
            $2_worker-filebeat-var
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-filebeat-var:/from \
+           -v cyb3rhq-docker_worker-filebeat-var:/from \
            -v $2_worker-filebeat-var:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_elastic-data-1:/from \
-           -v $2_wazuh-indexer-data-1:/to \
+           -v cyb3rhq-docker_elastic-data-1:/from \
+           -v $2_cyb3rhq-indexer-data-1:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_elastic-data-2:/from \
-           -v $2_wazuh-indexer-data-2:/to \
+           -v cyb3rhq-docker_elastic-data-2:/from \
+           -v $2_cyb3rhq-indexer-data-2:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_elastic-data-3:/from \
-           -v $2_wazuh-indexer-data-3:/to \
+           -v cyb3rhq-docker_elastic-data-3:/from \
+           -v $2_cyb3rhq-indexer-data-3:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-api-configuration:/from \
-           -v $2_master-wazuh-api-configuration:/to \
+           -v cyb3rhq-docker_ossec-api-configuration:/from \
+           -v $2_master-cyb3rhq-api-configuration:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-etc:/from \
-           -v $2_master-wazuh-etc:/to \
+           -v cyb3rhq-docker_ossec-etc:/from \
+           -v $2_master-cyb3rhq-etc:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-logs:/from \
-           -v $2_master-wazuh-logs:/to \
+           -v cyb3rhq-docker_ossec-logs:/from \
+           -v $2_master-cyb3rhq-logs:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-queue:/from \
-           -v $2_master-wazuh-queue:/to \
+           -v cyb3rhq-docker_ossec-queue:/from \
+           -v $2_master-cyb3rhq-queue:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-var-multigroups:/from \
-           -v $2_master-wazuh-var-multigroups:/to \
+           -v cyb3rhq-docker_ossec-var-multigroups:/from \
+           -v $2_master-cyb3rhq-var-multigroups:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-integrations:/from \
-           -v $2_master-wazuh-integrations:/to \
+           -v cyb3rhq-docker_ossec-integrations:/from \
+           -v $2_master-cyb3rhq-integrations:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-active-response:/from \
-           -v $2_master-wazuh-active-response:/to \
+           -v cyb3rhq-docker_ossec-active-response:/from \
+           -v $2_master-cyb3rhq-active-response:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-agentless:/from \
-           -v $2_master-wazuh-agentless:/to \
+           -v cyb3rhq-docker_ossec-agentless:/from \
+           -v $2_master-cyb3rhq-agentless:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_ossec-wodles:/from \
-           -v $2_master-wazuh-wodles:/to \
+           -v cyb3rhq-docker_ossec-wodles:/from \
+           -v $2_master-cyb3rhq-wodles:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_filebeat-etc:/from \
+           -v cyb3rhq-docker_filebeat-etc:/from \
            -v $2_master-filebeat-etc:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_filebeat-var:/from \
+           -v cyb3rhq-docker_filebeat-var:/from \
            -v $2_master-filebeat-var:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-api-configuration:/from \
-           -v $2_worker-wazuh-api-configuration:/to \
+           -v cyb3rhq-docker_worker-ossec-api-configuration:/from \
+           -v $2_worker-cyb3rhq-api-configuration:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-etc:/from \
-           -v $2_worker-wazuh-etc:/to \
+           -v cyb3rhq-docker_worker-ossec-etc:/from \
+           -v $2_worker-cyb3rhq-etc:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-logs:/from \
-           -v $2_worker-wazuh-logs:/to \
+           -v cyb3rhq-docker_worker-ossec-logs:/from \
+           -v $2_worker-cyb3rhq-logs:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-queue:/from \
-           -v $2_worker-wazuh-queue:/to \
+           -v cyb3rhq-docker_worker-ossec-queue:/from \
+           -v $2_worker-cyb3rhq-queue:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-var-multigroups:/from \
-           -v $2_worker-wazuh-var-multigroups:/to \
+           -v cyb3rhq-docker_worker-ossec-var-multigroups:/from \
+           -v $2_worker-cyb3rhq-var-multigroups:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-integrations:/from \
-           -v $2_worker-wazuh-integrations:/to \
+           -v cyb3rhq-docker_worker-ossec-integrations:/from \
+           -v $2_worker-cyb3rhq-integrations:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-active-response:/from \
-           -v $2_worker-wazuh-active-response:/to \
+           -v cyb3rhq-docker_worker-ossec-active-response:/from \
+           -v $2_worker-cyb3rhq-active-response:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-agentless:/from \
-           -v $2_worker-wazuh-agentless:/to \
+           -v cyb3rhq-docker_worker-ossec-agentless:/from \
+           -v $2_worker-cyb3rhq-agentless:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-ossec-wodles:/from \
-           -v $2_worker-wazuh-wodles:/to \
+           -v cyb3rhq-docker_worker-ossec-wodles:/from \
+           -v $2_worker-cyb3rhq-wodles:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-filebeat-etc:/from \
+           -v cyb3rhq-docker_worker-filebeat-etc:/from \
            -v $2_worker-filebeat-etc:/to \
            alpine ash -c "cd /from ; cp -avp . /to"
 
 docker container run --rm -it \
-           -v wazuh-docker_worker-filebeat-var:/from \
+           -v cyb3rhq-docker_worker-filebeat-var:/from \
            -v $2_worker-filebeat-var:/to \
            alpine ash -c "cd /from ; cp -avp . /to"

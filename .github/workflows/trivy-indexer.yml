@@ -3,7 +3,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Trivy scan Wazuh indexer
+name: Trivy scan Cyb3rhq indexer
 
 on:
   release:
@@ -39,11 +39,11 @@ jobs:
 
       - name: Checkout latest tag
         run: |
-          latest=$(curl -s "https://api.github.com/repos/wazuh/wazuh-docker/releases/latest" | jq -r '.tag_name')
+          latest=$(curl -s "https://api.github.com/repos/cyb3rhq/cyb3rhq-docker/releases/latest" | jq -r '.tag_name')
           git fetch origin
           git checkout $latest
 
-      - name: Build Wazuh images
+      - name: Build Cyb3rhq images
         run: build-docker-images/build-images.sh
 
       - name: Create enviroment variables
@@ -51,10 +51,10 @@ jobs:
           cat .env > $GITHUB_ENV
           echo "GITHUB_REF_NAME="${GITHUB_REF_NAME%/*} >> $GITHUB_ENV
 
-      - name: Run Trivy vulnerability scanner for Wazuh indexer
+      - name: Run Trivy vulnerability scanner for Cyb3rhq indexer
         uses: aquasecurity/trivy-action@2a2157eb22c08c9a1fac99263430307b8d1bc7a2
         with:
-          image-ref: 'wazuh/wazuh-indexer:${{env.WAZUH_IMAGE_VERSION}}'
+          image-ref: 'cyb3rhq/cyb3rhq-indexer:${{env.CYB3RHQ_IMAGE_VERSION}}'
           format: 'template'
           template: '@/contrib/sarif.tpl'
           output: 'trivy-results-indexer.sarif'
@@ -71,7 +71,7 @@ jobs:
           SLACK_CHANNEL: cicd-monitoring
           SLACK_COLOR: ${{ job.status }} # or a specific color like 'good' or '#ff00ff'
           #SLACK_ICON: https://github.com/rtCamp.png?size=48
-          SLACK_MESSAGE: "Check the results: https://github.com/wazuh/wazuh-docker/security/code-scanning?query=is%3Aopen+branch%3A${{ env.GITHUB_REF_NAME }}"
-          SLACK_TITLE: Wazuh docker Trivy vulnerability scan finished.
+          SLACK_MESSAGE: "Check the results: https://github.com/cyb3rhq/cyb3rhq-docker/security/code-scanning?query=is%3Aopen+branch%3A${{ env.GITHUB_REF_NAME }}"
+          SLACK_TITLE: Cyb3rhq docker Trivy vulnerability scan finished.
           SLACK_USERNAME: github_actions
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}

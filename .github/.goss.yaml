@@ -6,7 +6,7 @@ file:
     group: root
     filetype: file
     contains: []
-  /var/ossec/bin/wazuh-control:
+  /var/ossec/bin/cyb3rhq-control:
     exists: true
     mode: "0750"
     owner: root
@@ -16,22 +16,22 @@ file:
   /var/ossec/etc/lists/audit-keys:
     exists: true
     mode: "0660"
-    owner: wazuh
-    group: wazuh
+    owner: cyb3rhq
+    group: cyb3rhq
     filetype: file
     contains: []
   /var/ossec/etc/ossec.conf:
     exists: true
     mode: "0660"
     owner: root
-    group: wazuh
+    group: cyb3rhq
     filetype: file
     contains: []
   /var/ossec/etc/rules/local_rules.xml:
     exists: true
     mode: "0660"
-    owner: wazuh
-    group: wazuh
+    owner: cyb3rhq
+    group: cyb3rhq
     filetype: file
     contains: []
   /var/ossec/etc/sslmanager.cert:
@@ -53,7 +53,7 @@ package:
     installed: true
     versions:
     - 7.10.2
-  wazuh-manager:
+  cyb3rhq-manager:
     installed: true
     versions:
     - 5.0.0-1
@@ -73,31 +73,31 @@ port:
 process:
   filebeat:
     running: true
-  wazuh-analysisd:
+  cyb3rhq-analysisd:
     running: true
-  wazuh-authd:
+  cyb3rhq-authd:
     running: true
-  wazuh-execd:
+  cyb3rhq-execd:
     running: true
-  wazuh-monitord:
+  cyb3rhq-monitord:
     running: true
-  wazuh-remoted:
+  cyb3rhq-remoted:
     running: true
-  wazuh-syscheckd:
+  cyb3rhq-syscheckd:
     running: true
   s6-supervise:
     running: true
-  wazuh-db:
+  cyb3rhq-db:
     running: true
-  wazuh-modulesd:
+  cyb3rhq-modulesd:
     running: true
 user:
-  wazuh:
+  cyb3rhq:
     exists: true
     groups:
-    - wazuh
+    - cyb3rhq
     home: /var/ossec
     shell: /sbin/nologin
 group:
-  wazuh:
+  cyb3rhq:
     exists: true

@@ -1,11 +1,11 @@
-# Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+# Cyb3rhq App Copyright (C) 2017, Cyb3rhq Inc. (License GPLv2)
 version: '3'
 
 services:
   generator:
-    image: wazuh/wazuh-cert-tool:5.0.0
-    hostname: wazuh-cert-tool
-    container_name: wazuh-cert-tool
+    image: cyb3rhq/cyb3rhq-cert-tool:5.0.0
+    hostname: cyb3rhq-cert-tool
+    container_name: cyb3rhq-cert-tool
     volumes:
-      - ./config/wazuh_indexer_ssl_certs/:/certificates/
+      - ./config/cyb3rhq_indexer_ssl_certs/:/certificates/
       - ./config/certs.yml:/config/certs.yml

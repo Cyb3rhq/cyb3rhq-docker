@@ -1,24 +1,24 @@
 nodes:
-  # Wazuh indexer server nodes
+  # Cyb3rhq indexer server nodes
   indexer:
-    - name: wazuh1.indexer
-      ip: wazuh1.indexer
-    - name: wazuh2.indexer
-      ip: wazuh2.indexer
-    - name: wazuh3.indexer
-      ip: wazuh3.indexer
+    - name: cyb3rhq1.indexer
+      ip: cyb3rhq1.indexer
+    - name: cyb3rhq2.indexer
+      ip: cyb3rhq2.indexer
+    - name: cyb3rhq3.indexer
+      ip: cyb3rhq3.indexer
 
-  # Wazuh server nodes
-  # Use node_type only with more than one Wazuh manager
+  # Cyb3rhq server nodes
+  # Use node_type only with more than one Cyb3rhq manager
   server:
-    - name: wazuh.master
-      ip: wazuh.master
+    - name: cyb3rhq.master
+      ip: cyb3rhq.master
       node_type: master
-    - name: wazuh.worker
-      ip: wazuh.worker
+    - name: cyb3rhq.worker
+      ip: cyb3rhq.worker
       node_type: worker
 
-  # Wazuh dashboard node
+  # Cyb3rhq dashboard node
   dashboard:
-    - name: wazuh.dashboard
-      ip: wazuh.dashboard
+    - name: cyb3rhq.dashboard
+      ip: cyb3rhq.dashboard

@@ -1,0 +1,5 @@
+nodes:
+  # Cyb3rhq dashboard server nodes
+  dashboard:
+    - name: dashboard
+      ip: cyb3rhq.dashboard

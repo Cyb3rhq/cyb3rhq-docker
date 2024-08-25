@@ -1,10 +1,10 @@
-# Wazuh App Copyright (C) 2017, Wazuh Inc. (License GPLv2)
+# Cyb3rhq App Copyright (C) 2017, Cyb3rhq Inc. (License GPLv2)
 version: '3.7'
 
 services:
-  wazuh.master:
-    image: wazuh/wazuh-manager:5.0.0
-    hostname: wazuh.master
+  cyb3rhq.master:
+    image: cyb3rhq/cyb3rhq-manager:5.0.0
+    hostname: cyb3rhq.master
     restart: always
     ulimits:
       memlock:
@@ -18,35 +18,35 @@ services:
       - "514:514/udp"
       - "55000:55000"
     environment:
-      INDEXER_URL: https://wazuh1.indexer:9200
+      INDEXER_URL: https://cyb3rhq1.indexer:9200
       INDEXER_USERNAME: admin
       INDEXER_PASSWORD: admin
       FILEBEAT_SSL_VERIFICATION_MODE: full
       SSL_CERTIFICATE_AUTHORITIES: /etc/ssl/root-ca.pem
       SSL_CERTIFICATE: /etc/ssl/filebeat.pem
       SSL_KEY: /etc/ssl/filebeat.key
-      API_USERNAME: wazuh-wui
+      API_USERNAME: cyb3rhq-wui
       API_PASSWORD: MyS3cr37P450r.*-
     volumes:
-      - master-wazuh-api-configuration:/var/ossec/api/configuration
-      - master-wazuh-etc:/var/ossec/etc
-      - master-wazuh-logs:/var/ossec/logs
-      - master-wazuh-queue:/var/ossec/queue
-      - master-wazuh-var-multigroups:/var/ossec/var/multigroups
-      - master-wazuh-integrations:/var/ossec/integrations
-      - master-wazuh-active-response:/var/ossec/active-response/bin
-      - master-wazuh-agentless:/var/ossec/agentless
-      - master-wazuh-wodles:/var/ossec/wodles
+      - master-cyb3rhq-api-configuration:/var/ossec/api/configuration
+      - master-cyb3rhq-etc:/var/ossec/etc
+      - master-cyb3rhq-logs:/var/ossec/logs
+      - master-cyb3rhq-queue:/var/ossec/queue
+      - master-cyb3rhq-var-multigroups:/var/ossec/var/multigroups
+      - master-cyb3rhq-integrations:/var/ossec/integrations
+      - master-cyb3rhq-active-response:/var/ossec/active-response/bin
+      - master-cyb3rhq-agentless:/var/ossec/agentless
+      - master-cyb3rhq-wodles:/var/ossec/wodles
       - master-filebeat-etc:/etc/filebeat
       - master-filebeat-var:/var/lib/filebeat
-      - ./config/wazuh_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh.master.pem:/etc/ssl/filebeat.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh.master-key.pem:/etc/ssl/filebeat.key
-      - ./config/wazuh_cluster/wazuh_manager.conf:/wazuh-config-mount/etc/ossec.conf
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.master.pem:/etc/ssl/filebeat.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.master-key.pem:/etc/ssl/filebeat.key
+      - ./config/cyb3rhq_cluster/cyb3rhq_manager.conf:/cyb3rhq-config-mount/etc/ossec.conf
 
-  wazuh.worker:
-    image: wazuh/wazuh-manager:5.0.0
-    hostname: wazuh.worker
+  cyb3rhq.worker:
+    image: cyb3rhq/cyb3rhq-manager:5.0.0
+    hostname: cyb3rhq.worker
     restart: always
     ulimits:
       memlock:
@@ -56,7 +56,7 @@ services:
         soft: 655360
         hard: 655360
     environment:
-      INDEXER_URL: https://wazuh1.indexer:9200
+      INDEXER_URL: https://cyb3rhq1.indexer:9200
       INDEXER_USERNAME: admin
       INDEXER_PASSWORD: admin
       FILEBEAT_SSL_VERIFICATION_MODE: full
@@ -64,25 +64,25 @@ services:
       SSL_CERTIFICATE: /etc/ssl/filebeat.pem
       SSL_KEY: /etc/ssl/filebeat.key
     volumes:
-      - worker-wazuh-api-configuration:/var/ossec/api/configuration
-      - worker-wazuh-etc:/var/ossec/etc
-      - worker-wazuh-logs:/var/ossec/logs
-      - worker-wazuh-queue:/var/ossec/queue
-      - worker-wazuh-var-multigroups:/var/ossec/var/multigroups
-      - worker-wazuh-integrations:/var/ossec/integrations
-      - worker-wazuh-active-response:/var/ossec/active-response/bin
-      - worker-wazuh-agentless:/var/ossec/agentless
-      - worker-wazuh-wodles:/var/ossec/wodles
+      - worker-cyb3rhq-api-configuration:/var/ossec/api/configuration
+      - worker-cyb3rhq-etc:/var/ossec/etc
+      - worker-cyb3rhq-logs:/var/ossec/logs
+      - worker-cyb3rhq-queue:/var/ossec/queue
+      - worker-cyb3rhq-var-multigroups:/var/ossec/var/multigroups
+      - worker-cyb3rhq-integrations:/var/ossec/integrations
+      - worker-cyb3rhq-active-response:/var/ossec/active-response/bin
+      - worker-cyb3rhq-agentless:/var/ossec/agentless
+      - worker-cyb3rhq-wodles:/var/ossec/wodles
       - worker-filebeat-etc:/etc/filebeat
       - worker-filebeat-var:/var/lib/filebeat
-      - ./config/wazuh_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh.worker.pem:/etc/ssl/filebeat.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh.worker-key.pem:/etc/ssl/filebeat.key
-      - ./config/wazuh_cluster/wazuh_worker.conf:/wazuh-config-mount/etc/ossec.conf
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca-manager.pem:/etc/ssl/root-ca.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.worker.pem:/etc/ssl/filebeat.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.worker-key.pem:/etc/ssl/filebeat.key
+      - ./config/cyb3rhq_cluster/cyb3rhq_worker.conf:/cyb3rhq-config-mount/etc/ossec.conf
 
-  wazuh1.indexer:
-    image: wazuh/wazuh-indexer:5.0.0
-    hostname: wazuh1.indexer
+  cyb3rhq1.indexer:
+    image: cyb3rhq/cyb3rhq-indexer:5.0.0
+    hostname: cyb3rhq1.indexer
     restart: always
     ulimits:
       memlock:
@@ -96,27 +96,27 @@ services:
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
       bootstrap.memory_lock: "true"
-      NETWORK_HOST: wazuh1.indexer
-      NODE_NAME: wazuh1.indexer
-      CLUSTER_INITIAL_MASTER_NODES: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
-      CLUSTER_NAME: "wazuh-cluster"
-      DISCOVERY_SEED_HOSTS: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
+      NETWORK_HOST: cyb3rhq1.indexer
+      NODE_NAME: cyb3rhq1.indexer
+      CLUSTER_INITIAL_MASTER_NODES: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
+      CLUSTER_NAME: "cyb3rhq-cluster"
+      DISCOVERY_SEED_HOSTS: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
       NODE_MAX_LOCAL_STORAGE_NODES: "3"
-      PATH_DATA: /var/lib/wazuh-indexer
-      PATH_LOGS: /var/log/wazuh-indexer
-      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh1.indexer.pem
-      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh1.indexer.key
-      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh1.indexer.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh1.indexer.key
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
+      PATH_DATA: /var/lib/cyb3rhq-indexer
+      PATH_LOGS: /var/log/cyb3rhq-indexer
+      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.pem
+      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.key
+      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.key
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
       PLUGINS_SECURITY_SSL_HTTP_ENABLED: "true"
       PLUGINS_SECURITY_SSL_TRANSPORT_ENFORCE_HOSTNAME_VERIFICATION: "false"
       PLUGINS_SECURITY_SSL_TRANSPORT_RESOLVE_HOSTNAME: "false"
-      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"
       PLUGINS_SECURITY_CHECK_SNAPSHOT_RESTORE_WRITE_PRIVILEGES: "true"
       PLUGINS_SECURITY_ENABLE_SNAPSHOT_RESTORE_PRIVILEGE: "true"
-      PLUGINS_SECURITY_NODES_DN: '["CN=wazuh1.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh2.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh3.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=filebeat,OU=Wazuh,O=Wazuh,L=California,C=US"]'
+      PLUGINS_SECURITY_NODES_DN: '["CN=cyb3rhq1.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq2.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq3.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=filebeat,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"]'
       PLUGINS_SECURITY_RESTAPI_ROLES_ENABLED: '["all_access", "security_rest_api_access"]'
       PLUGINS_SECURITY_SYSTEM_INDICES_ENABLED: "true"
       PLUGINS_SECURITY_SYSTEM_INDICES_INDICES: '[".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]'
@@ -124,18 +124,18 @@ services:
       CLUSTER_ROUTING_ALLOCATION_DISK_THRESHOLD_ENABLED: "false"
       COMPATIBILITY_OVERRIDE_MAIN_RESPONSE_VERSION: "true"
     volumes:
-      - wazuh-indexer-data-1:/var/lib/wazuh-indexer
-      - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh1.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh1.indexer.key
-      - ./config/wazuh_indexer_ssl_certs/wazuh1.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh1.indexer.pem
-      - ./config/wazuh_indexer_ssl_certs/admin.pem:/usr/share/wazuh-indexer/certs/admin.pem
-      - ./config/wazuh_indexer_ssl_certs/admin-key.pem:/usr/share/wazuh-indexer/certs/admin-key.pem
+      - cyb3rhq-indexer-data-1:/var/lib/cyb3rhq-indexer
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca.pem:/usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq1.indexer-key.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.key
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq1.indexer.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq1.indexer.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/admin.pem:/usr/share/cyb3rhq-indexer/certs/admin.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/admin-key.pem:/usr/share/cyb3rhq-indexer/certs/admin-key.pem
       #  if you need mount a custom opensearch.yml, uncomment the next line and delete the environment variables
-      # - ./config/wazuh_indexer/wazuh1.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml
+      # - ./config/cyb3rhq_indexer/cyb3rhq1.indexer.yml:/usr/share/cyb3rhq-indexer/opensearch.yml
 
-  wazuh2.indexer:
-    image: wazuh/wazuh-indexer:5.0.0
-    hostname: wazuh2.indexer
+  cyb3rhq2.indexer:
+    image: cyb3rhq/cyb3rhq-indexer:5.0.0
+    hostname: cyb3rhq2.indexer
     restart: always
     ulimits:
       memlock:
@@ -147,27 +147,27 @@ services:
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
       bootstrap.memory_lock: "true"
-      NETWORK_HOST: wazuh2.indexer
-      NODE_NAME: wazuh2.indexer
-      CLUSTER_INITIAL_MASTER_NODES: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
-      CLUSTER_NAME: "wazuh-cluster"
-      DISCOVERY_SEED_HOSTS: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
+      NETWORK_HOST: cyb3rhq2.indexer
+      NODE_NAME: cyb3rhq2.indexer
+      CLUSTER_INITIAL_MASTER_NODES: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
+      CLUSTER_NAME: "cyb3rhq-cluster"
+      DISCOVERY_SEED_HOSTS: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
       NODE_MAX_LOCAL_STORAGE_NODES: "3"
-      PATH_DATA: /var/lib/wazuh-indexer
-      PATH_LOGS: /var/log/wazuh-indexer
-      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh2.indexer.pem
-      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh2.indexer.key
-      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh2.indexer.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh2.indexer.key
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
+      PATH_DATA: /var/lib/cyb3rhq-indexer
+      PATH_LOGS: /var/log/cyb3rhq-indexer
+      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.pem
+      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.key
+      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.key
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
       PLUGINS_SECURITY_SSL_HTTP_ENABLED: "true"
       PLUGINS_SECURITY_SSL_TRANSPORT_ENFORCE_HOSTNAME_VERIFICATION: "false"
       PLUGINS_SECURITY_SSL_TRANSPORT_RESOLVE_HOSTNAME: "false"
-      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"
       PLUGINS_SECURITY_CHECK_SNAPSHOT_RESTORE_WRITE_PRIVILEGES: "true"
       PLUGINS_SECURITY_ENABLE_SNAPSHOT_RESTORE_PRIVILEGE: "true"
-      PLUGINS_SECURITY_NODES_DN: '["CN=wazuh1.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh2.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh3.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=filebeat,OU=Wazuh,O=Wazuh,L=California,C=US"]'
+      PLUGINS_SECURITY_NODES_DN: '["CN=cyb3rhq1.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq2.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq3.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=filebeat,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"]'
       PLUGINS_SECURITY_RESTAPI_ROLES_ENABLED: '["all_access", "security_rest_api_access"]'
       PLUGINS_SECURITY_SYSTEM_INDICES_ENABLED: "true"
       PLUGINS_SECURITY_SYSTEM_INDICES_INDICES: '[".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]'
@@ -175,16 +175,16 @@ services:
       CLUSTER_ROUTING_ALLOCATION_DISK_THRESHOLD_ENABLED: "false"
       COMPATIBILITY_OVERRIDE_MAIN_RESPONSE_VERSION: "true"
     volumes:
-      - wazuh-indexer-data-2:/var/lib/wazuh-indexer
-      - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh2.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh2.indexer.key
-      - ./config/wazuh_indexer_ssl_certs/wazuh2.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh2.indexer.pem
+      - cyb3rhq-indexer-data-2:/var/lib/cyb3rhq-indexer
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca.pem:/usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq2.indexer-key.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.key
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq2.indexer.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq2.indexer.pem
       #  if you need mount a custom opensearch.yml, uncomment the next line and delete the environment variables
-      # - ./config/wazuh_indexer/wazuh2.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml
+      # - ./config/cyb3rhq_indexer/cyb3rhq2.indexer.yml:/usr/share/cyb3rhq-indexer/opensearch.yml
 
-  wazuh3.indexer:
-    image: wazuh/wazuh-indexer:5.0.0
-    hostname: wazuh3.indexer
+  cyb3rhq3.indexer:
+    image: cyb3rhq/cyb3rhq-indexer:5.0.0
+    hostname: cyb3rhq3.indexer
     restart: always
     ulimits:
       memlock:
@@ -196,27 +196,27 @@ services:
     environment:
       OPENSEARCH_JAVA_OPTS: "-Xms1g -Xmx1g"
       bootstrap.memory_lock: "true"
-      NETWORK_HOST: wazuh3.indexer
-      NODE_NAME: wazuh3.indexer
-      CLUSTER_INITIAL_MASTER_NODES: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
-      CLUSTER_NAME: "wazuh-cluster"
-      DISCOVERY_SEED_HOSTS: '["wazuh1.indexer", "wazuh2.indexer", "wazuh3.indexer"]'
+      NETWORK_HOST: cyb3rhq3.indexer
+      NODE_NAME: cyb3rhq3.indexer
+      CLUSTER_INITIAL_MASTER_NODES: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
+      CLUSTER_NAME: "cyb3rhq-cluster"
+      DISCOVERY_SEED_HOSTS: '["cyb3rhq1.indexer", "cyb3rhq2.indexer", "cyb3rhq3.indexer"]'
       NODE_MAX_LOCAL_STORAGE_NODES: "3"
-      PATH_DATA: /var/lib/wazuh-indexer
-      PATH_LOGS: /var/log/wazuh-indexer
-      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh3.indexer.pem
-      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh3.indexer.key
-      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh3.indexer.pem
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/wazuh-indexer/certs/wazuh3.indexer.key
-      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/wazuh-indexer/certs/root-ca.pem
+      PATH_DATA: /var/lib/cyb3rhq-indexer
+      PATH_LOGS: /var/log/cyb3rhq-indexer
+      PLUGINS_SECURITY_SSL_HTTP_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.pem
+      PLUGINS_SECURITY_SSL_HTTP_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.key
+      PLUGINS_SECURITY_SSL_HTTP_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMCERT_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.pem
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMKEY_FILEPATH: /usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.key
+      PLUGINS_SECURITY_SSL_TRANSPORT_PEMTRUSTEDCAS_FILEPATH: /usr/share/cyb3rhq-indexer/certs/root-ca.pem
       PLUGINS_SECURITY_SSL_HTTP_ENABLED: "true"
       PLUGINS_SECURITY_SSL_TRANSPORT_ENFORCE_HOSTNAME_VERIFICATION: "false"
       PLUGINS_SECURITY_SSL_TRANSPORT_RESOLVE_HOSTNAME: "false"
-      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Wazuh,O=Wazuh,L=California,C=US"
+      PLUGINS_SECURITY_AUTHCZ_ADMIN_DN: "CN=admin,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"
       PLUGINS_SECURITY_CHECK_SNAPSHOT_RESTORE_WRITE_PRIVILEGES: "true"
       PLUGINS_SECURITY_ENABLE_SNAPSHOT_RESTORE_PRIVILEGE: "true"
-      PLUGINS_SECURITY_NODES_DN: '["CN=wazuh1.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh2.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=wazuh3.indexer,OU=Wazuh,O=Wazuh,L=California,C=US", "CN=filebeat,OU=Wazuh,O=Wazuh,L=California,C=US"]'
+      PLUGINS_SECURITY_NODES_DN: '["CN=cyb3rhq1.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq2.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=cyb3rhq3.indexer,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US", "CN=filebeat,OU=Cyb3rhq,O=Cyb3rhq,L=California,C=US"]'
       PLUGINS_SECURITY_RESTAPI_ROLES_ENABLED: '["all_access", "security_rest_api_access"]'
       PLUGINS_SECURITY_SYSTEM_INDICES_ENABLED: "true"
       PLUGINS_SECURITY_SYSTEM_INDICES_INDICES: '[".opendistro-alerting-config", ".opendistro-alerting-alert*", ".opendistro-anomaly-results*", ".opendistro-anomaly-detector*", ".opendistro-anomaly-checkpoints", ".opendistro-anomaly-detection-state", ".opendistro-reports-*", ".opendistro-notifications-*", ".opendistro-notebooks", ".opensearch-observability", ".opendistro-asynchronous-search-response*", ".replication-metadata-store"]'
@@ -224,16 +224,16 @@ services:
       CLUSTER_ROUTING_ALLOCATION_DISK_THRESHOLD_ENABLED: "false"
       COMPATIBILITY_OVERRIDE_MAIN_RESPONSE_VERSION: "true"
     volumes:
-      - wazuh-indexer-data-3:/var/lib/wazuh-indexer
-      - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-indexer/certs/root-ca.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh3.indexer-key.pem:/usr/share/wazuh-indexer/certs/wazuh3.indexer.key
-      - ./config/wazuh_indexer_ssl_certs/wazuh3.indexer.pem:/usr/share/wazuh-indexer/certs/wazuh3.indexer.pem
+      - cyb3rhq-indexer-data-3:/var/lib/cyb3rhq-indexer
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca.pem:/usr/share/cyb3rhq-indexer/certs/root-ca.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq3.indexer-key.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.key
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq3.indexer.pem:/usr/share/cyb3rhq-indexer/certs/cyb3rhq3.indexer.pem
       #  if you need mount a custom opensearch.yml, uncomment the next line and delete the environment variables
-      # - ./config/wazuh_indexer/wazuh3.indexer.yml:/usr/share/wazuh-indexer/opensearch.yml
+      # - ./config/cyb3rhq_indexer/cyb3rhq3.indexer.yml:/usr/share/cyb3rhq-indexer/opensearch.yml
 
-  wazuh.dashboard:
-    image: wazuh/wazuh-dashboard:5.0.0
-    hostname: wazuh.dashboard
+  cyb3rhq.dashboard:
+    image: cyb3rhq/cyb3rhq-dashboard:5.0.0
+    hostname: cyb3rhq.dashboard
     restart: always
     ulimits:
       memlock:
@@ -245,9 +245,9 @@ services:
     ports:
       - 443:5601
     environment:
-      OPENSEARCH_HOSTS: "https://wazuh1.indexer:9200"
-      WAZUH_API_URL: "https://wazuh.master"
-      API_USERNAME: wazuh-wui
+      OPENSEARCH_HOSTS: "https://cyb3rhq1.indexer:9200"
+      CYB3RHQ_API_URL: "https://cyb3rhq.master"
+      API_USERNAME: cyb3rhq-wui
       API_PASSWORD: MyS3cr37P450r.*-
       DASHBOARD_USERNAME: kibanaserver
       DASHBOARD_PASSWORD: kibanaserver
@@ -258,24 +258,24 @@ services:
       OPENSEARCH_SECURITY_MULTITENANCY_ENABLED: "false"
       SERVER_SSL_ENABLED: "true"
       OPENSEARCH_SECURITY_READONLY_MODE_ROLES: '["kibana_read_only"]'
-      SERVER_SSL_KEY: "/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem"
-      SERVER_SSL_CERTIFICATE: "/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem"
-      OPENSEARCH_SSL_CERTIFICATEAUTHORITIES: '["/usr/share/wazuh-dashboard/certs/root-ca.pem"]'
+      SERVER_SSL_KEY: "/usr/share/cyb3rhq-dashboard/certs/cyb3rhq-dashboard-key.pem"
+      SERVER_SSL_CERTIFICATE: "/usr/share/cyb3rhq-dashboard/certs/cyb3rhq-dashboard.pem"
+      OPENSEARCH_SSL_CERTIFICATEAUTHORITIES: '["/usr/share/cyb3rhq-dashboard/certs/root-ca.pem"]'
       UISETTINGS_OVERRIDES_DEFAULTROUTE: /app/wz-home
     volumes:
-      - wazuh-dashboard-config:/usr/share/wazuh-dashboard/data/wazuh/config
-      - wazuh-dashboard-custom:/usr/share/wazuh-dashboard/plugins/wazuh/public/assets/custom
-      - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard.pem
-      - ./config/wazuh_indexer_ssl_certs/wazuh.dashboard-key.pem:/usr/share/wazuh-dashboard/certs/wazuh-dashboard-key.pem
-      - ./config/wazuh_indexer_ssl_certs/root-ca.pem:/usr/share/wazuh-dashboard/certs/root-ca.pem
-      - ./config/wazuh_dashboard/wazuh.yml:/usr/share/wazuh-dashboard/data/wazuh/config/wazuh.yml
+      - cyb3rhq-dashboard-config:/usr/share/cyb3rhq-dashboard/data/cyb3rhq/config
+      - cyb3rhq-dashboard-custom:/usr/share/cyb3rhq-dashboard/plugins/cyb3rhq/public/assets/custom
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.dashboard.pem:/usr/share/cyb3rhq-dashboard/certs/cyb3rhq-dashboard.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/cyb3rhq.dashboard-key.pem:/usr/share/cyb3rhq-dashboard/certs/cyb3rhq-dashboard-key.pem
+      - ./config/cyb3rhq_indexer_ssl_certs/root-ca.pem:/usr/share/cyb3rhq-dashboard/certs/root-ca.pem
+      - ./config/cyb3rhq_dashboard/cyb3rhq.yml:/usr/share/cyb3rhq-dashboard/data/cyb3rhq/config/cyb3rhq.yml
       #  if you need mount a custom opensearch-dashboards.yml, uncomment the next line and delete the environment variables
-      # - ./config/wazuh_dashboard/opensearch_dashboards.yml:/usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
+      # - ./config/cyb3rhq_dashboard/opensearch_dashboards.yml:/usr/share/cyb3rhq-dashboard/config/opensearch_dashboards.yml
     depends_on:
-      - wazuh1.indexer
+      - cyb3rhq1.indexer
     links:
-      - wazuh1.indexer:wazuh1.indexer
-      - wazuh.master:wazuh.master
+      - cyb3rhq1.indexer:cyb3rhq1.indexer
+      - cyb3rhq.master:cyb3rhq.master
 
   nginx:
     image: nginx:stable
@@ -284,41 +284,41 @@ services:
     ports:
       - "1514:1514"
     depends_on:
-      - wazuh.master
-      - wazuh.worker
-      - wazuh.dashboard
+      - cyb3rhq.master
+      - cyb3rhq.worker
+      - cyb3rhq.dashboard
     links:
-      - wazuh.master:wazuh.master
-      - wazuh.worker:wazuh.worker
-      - wazuh.dashboard:wazuh.dashboard
+      - cyb3rhq.master:cyb3rhq.master
+      - cyb3rhq.worker:cyb3rhq.worker
+      - cyb3rhq.dashboard:cyb3rhq.dashboard
     volumes:
       - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
 
 volumes:
-  master-wazuh-api-configuration:
-  master-wazuh-etc:
-  master-wazuh-logs:
-  master-wazuh-queue:
-  master-wazuh-var-multigroups:
-  master-wazuh-integrations:
-  master-wazuh-active-response:
-  master-wazuh-agentless:
-  master-wazuh-wodles:
+  master-cyb3rhq-api-configuration:
+  master-cyb3rhq-etc:
+  master-cyb3rhq-logs:
+  master-cyb3rhq-queue:
+  master-cyb3rhq-var-multigroups:
+  master-cyb3rhq-integrations:
+  master-cyb3rhq-active-response:
+  master-cyb3rhq-agentless:
+  master-cyb3rhq-wodles:
   master-filebeat-etc:
   master-filebeat-var:
-  worker-wazuh-api-configuration:
-  worker-wazuh-etc:
-  worker-wazuh-logs:
-  worker-wazuh-queue:
-  worker-wazuh-var-multigroups:
-  worker-wazuh-integrations:
-  worker-wazuh-active-response:
-  worker-wazuh-agentless:
-  worker-wazuh-wodles:
+  worker-cyb3rhq-api-configuration:
+  worker-cyb3rhq-etc:
+  worker-cyb3rhq-logs:
+  worker-cyb3rhq-queue:
+  worker-cyb3rhq-var-multigroups:
+  worker-cyb3rhq-integrations:
+  worker-cyb3rhq-active-response:
+  worker-cyb3rhq-agentless:
+  worker-cyb3rhq-wodles:
   worker-filebeat-etc:
   worker-filebeat-var:
-  wazuh-indexer-data-1:
-  wazuh-indexer-data-2:
-  wazuh-indexer-data-3:
-  wazuh-dashboard-config:
-  wazuh-dashboard-custom:
+  cyb3rhq-indexer-data-1:
+  cyb3rhq-indexer-data-2:
+  cyb3rhq-indexer-data-3:
+  cyb3rhq-dashboard-config:
+  cyb3rhq-dashboard-custom:

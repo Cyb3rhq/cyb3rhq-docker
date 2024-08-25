@@ -1,6 +1,6 @@
-# Deploy Wazuh Docker in single node configuration
+# Deploy Cyb3rhq Docker in single node configuration
 
-This deployment is defined in the `docker-compose.yml` file with one Wazuh manager containers, one Wazuh indexer containers, and one Wazuh dashboard container. It can be deployed by following these steps: 
+This deployment is defined in the `docker-compose.yml` file with one Cyb3rhq manager containers, one Cyb3rhq indexer containers, and one Cyb3rhq dashboard container. It can be deployed by following these steps: 
 
 1) Increase max_map_count on your host (Linux). This command must be run with root permissions:
 ```
@@ -21,4 +21,4 @@ $ docker-compose up
 $ docker-compose up -d
 ```
 
-The environment takes about 1 minute to get up (depending on your Docker host) for the first time since Wazuh Indexer must be started for the first time and the indexes and index patterns must be generated.
+The environment takes about 1 minute to get up (depending on your Docker host) for the first time since Cyb3rhq Indexer must be started for the first time and the indexes and index patterns must be generated.

@@ -1,4 +1,4 @@
-name: Wazuh Docker pipeline
+name: Cyb3rhq Docker pipeline
 
 on: [pull_request]
 
@@ -15,7 +15,7 @@ jobs:
         curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
         chmod +x /usr/local/bin/docker-compose
 
-    - name: Build Wazuh images
+    - name: Build Cyb3rhq images
       run: build-docker-images/build-images.sh
 
     - name: Create enviroment variables
@@ -23,38 +23,38 @@ jobs:
 
     - name: Create backup Docker images
       run: |
-        mkdir -p /home/runner/work/wazuh-docker/wazuh-docker/docker-images/
-        docker save wazuh/wazuh-manager:${{env.WAZUH_IMAGE_VERSION}} -o /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-manager.tar
-        docker save wazuh/wazuh-indexer:${{env.WAZUH_IMAGE_VERSION}} -o /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-indexer.tar
-        docker save wazuh/wazuh-dashboard:${{env.WAZUH_IMAGE_VERSION}} -o /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-dashboard.tar
-        docker save wazuh/wazuh-cert-tool:${{env.WAZUH_IMAGE_VERSION}} -o /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-cert-tool.tar
+        mkdir -p /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/
+        docker save cyb3rhq/cyb3rhq-manager:${{env.CYB3RHQ_IMAGE_VERSION}} -o /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-manager.tar
+        docker save cyb3rhq/cyb3rhq-indexer:${{env.CYB3RHQ_IMAGE_VERSION}} -o /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-indexer.tar
+        docker save cyb3rhq/cyb3rhq-dashboard:${{env.CYB3RHQ_IMAGE_VERSION}} -o /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-dashboard.tar
+        docker save cyb3rhq/cyb3rhq-cert-tool:${{env.CYB3RHQ_IMAGE_VERSION}} -o /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-cert-tool.tar
 
-    - name: Temporarily save Wazuh manager Docker image
+    - name: Temporarily save Cyb3rhq manager Docker image
       uses: actions/upload-artifact@v3
       with:
         name: docker-artifact-manager
-        path: /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-manager.tar
+        path: /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-manager.tar
         retention-days: 1
 
-    - name: Temporarily save Wazuh indexer Docker image
+    - name: Temporarily save Cyb3rhq indexer Docker image
       uses: actions/upload-artifact@v3
       with:
         name: docker-artifact-indexer
-        path: /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-indexer.tar
+        path: /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-indexer.tar
         retention-days: 1
 
-    - name: Temporarily save Wazuh dashboard Docker image
+    - name: Temporarily save Cyb3rhq dashboard Docker image
       uses: actions/upload-artifact@v3
       with:
         name: docker-artifact-dashboard
-        path: /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-dashboard.tar
+        path: /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-dashboard.tar
         retention-days: 1
 
-    - name: Temporarily save Wazuh Cert Tool Docker image
+    - name: Temporarily save Cyb3rhq Cert Tool Docker image
       uses: actions/upload-artifact@v3
       with:
         name: docker-artifact-cert-tool
-        path: /home/runner/work/wazuh-docker/wazuh-docker/docker-images/wazuh-cert-tool.tar
+        path: /home/runner/work/cyb3rhq-docker/cyb3rhq-docker/docker-images/cyb3rhq-cert-tool.tar
         retention-days: 1
 
     - name: Install Goss
@@ -62,8 +62,8 @@ jobs:
       with:
         version: v0.3.16
 
-    - name: Execute Goss tests (wazuh-manager)
-      run: dgoss run wazuh/wazuh-manager:${{env.WAZUH_IMAGE_VERSION}}
+    - name: Execute Goss tests (cyb3rhq-manager)
+      run: dgoss run cyb3rhq/cyb3rhq-manager:${{env.CYB3RHQ_IMAGE_VERSION}}
       env:
         GOSS_SLEEP: 30
         GOSS_FILE: .github/.goss.yaml
@@ -84,33 +84,33 @@ jobs:
     - name: Create enviroment variables
       run: cat .env > $GITHUB_ENV
 
-    - name: Retrieve saved Wazuh indexer Docker image
+    - name: Retrieve saved Cyb3rhq indexer Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-indexer
 
-    - name: Retrieve saved Wazuh manager Docker image
+    - name: Retrieve saved Cyb3rhq manager Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-manager
 
-    - name: Retrieve saved Wazuh dashboard Docker image
+    - name: Retrieve saved Cyb3rhq dashboard Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-dashboard
 
-    - name: Retrieve saved Wazuh Cert Tool Docker image
+    - name: Retrieve saved Cyb3rhq Cert Tool Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-cert-tool
 
     - name: Docker load
       run: |
-        docker load --input ./wazuh-indexer.tar
-        docker load --input ./wazuh-dashboard.tar
-        docker load --input ./wazuh-manager.tar
-        docker load --input ./wazuh-cert-tool.tar
-        rm -rf wazuh-manager.tar wazuh-indexer.tar wazuh-dashboard.tar wazuh-cert-tool.tar
+        docker load --input ./cyb3rhq-indexer.tar
+        docker load --input ./cyb3rhq-dashboard.tar
+        docker load --input ./cyb3rhq-manager.tar
+        docker load --input ./cyb3rhq-cert-tool.tar
+        rm -rf cyb3rhq-manager.tar cyb3rhq-indexer.tar cyb3rhq-dashboard.tar cyb3rhq-cert-tool.tar
 
 
     - name: Create single node certficates
@@ -119,7 +119,7 @@ jobs:
     - name: Start single node stack
       run: docker-compose -f single-node/docker-compose.yml up -d
 
-    - name: Check Wazuh indexer start
+    - name: Check Cyb3rhq indexer start
       run: |
        sleep 60
        status_green="`curl -XGET "https://0.0.0.0:9200/_cluster/health" -u admin:SecretPassword -k -s | grep green | wc -l`"
@@ -139,64 +139,64 @@ jobs:
        fi
 
 
-    - name: Check Wazuh indexer nodes
+    - name: Check Cyb3rhq indexer nodes
       run: |
        nodes="`curl -XGET "https://0.0.0.0:9200/_cat/nodes" -u admin:SecretPassword -k -s | grep -E "indexer" | wc -l`"
        if [[ $nodes -eq 1 ]]; then
-        echo "Wazuh indexer nodes: ${nodes}"
+        echo "Cyb3rhq indexer nodes: ${nodes}"
        else
-        echo "Wazuh indexer nodes: ${nodes}"
+        echo "Cyb3rhq indexer nodes: ${nodes}"
         exit 1
        fi
 
-    - name: Check documents into wazuh-alerts index
+    - name: Check documents into cyb3rhq-alerts index
       run: |
        sleep 120
-       docs="`curl -XGET "https://0.0.0.0:9200/wazuh-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"`"
+       docs="`curl -XGET "https://0.0.0.0:9200/cyb3rhq-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"`"
        if [[ $docs -gt 0 ]]; then
-        echo "wazuh-alerts index documents: ${docs}"
+        echo "cyb3rhq-alerts index documents: ${docs}"
        else
-        echo "wazuh-alerts index documents: ${docs}"
+        echo "cyb3rhq-alerts index documents: ${docs}"
         exit 1
        fi
 
-    - name: Check Wazuh templates
+    - name: Check Cyb3rhq templates
       run: |
-       qty_templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep -P "wazuh|wazuh-agent|wazuh-statistics" | wc -l`"
-       templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep -P "wazuh|wazuh-agent|wazuh-statistics"`"
+       qty_templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep -P "cyb3rhq|cyb3rhq-agent|cyb3rhq-statistics" | wc -l`"
+       templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep -P "cyb3rhq|cyb3rhq-agent|cyb3rhq-statistics"`"
        if [[ $qty_templates -gt 3 ]]; then
-        echo "wazuh templates:"
+        echo "cyb3rhq templates:"
         echo "${templates}"
        else
-        echo "wazuh templates:"
+        echo "cyb3rhq templates:"
         echo "${templates}"
         exit 1
        fi
 
-    - name: Check Wazuh manager start
+    - name: Check Cyb3rhq manager start
       run: |
         services="`curl -k -s -X GET "https://0.0.0.0:55000/manager/status?pretty=true" -H  "Authorization: Bearer ${{env.TOKEN}}" | jq -r .data.affected_items | grep running | wc -l`"
         if [[ $services -gt 9 ]]; then
-          echo "Wazuh Manager Services: ${services}"
+          echo "Cyb3rhq Manager Services: ${services}"
           echo "OK"
         else
-          echo "Wazuh indexer nodes: ${nodes}"
+          echo "Cyb3rhq indexer nodes: ${nodes}"
           curl -k -X GET "https://0.0.0.0:55000/manager/status?pretty=true" -H  "Authorization: Bearer ${{env.TOKEN}}" | jq -r .data.affected_items
           exit 1
         fi
       env:
-        TOKEN: $(curl -s -u wazuh-wui:MyS3cr37P450r.*- -k -X GET "https://0.0.0.0:55000/security/user/authenticate?raw=true")
+        TOKEN: $(curl -s -u cyb3rhq-wui:MyS3cr37P450r.*- -k -X GET "https://0.0.0.0:55000/security/user/authenticate?raw=true")
 
     - name: Check filebeat output
       run: ./.github/single-node-filebeat-check.sh
 
-    - name: Check Wazuh dashboard service URL
+    - name: Check Cyb3rhq dashboard service URL
       run: |
        status=$(curl -XGET --silent  https://0.0.0.0:443/app/status -k -u admin:SecretPassword -I -s | grep -E "^HTTP" | awk  '{print $2}')
        if [[ $status -eq 200 ]]; then
-        echo "Wazuh dashboard status: ${status}"
+        echo "Cyb3rhq dashboard status: ${status}"
        else
-        echo "Wazuh dashboard status: ${status}"
+        echo "Cyb3rhq dashboard status: ${status}"
         exit 1
        fi
 
@@ -227,33 +227,33 @@ jobs:
         docker rmi $(docker image ls -aq)
         df -h
 
-    - name: Retrieve saved Wazuh dashboard Docker image
+    - name: Retrieve saved Cyb3rhq dashboard Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-dashboard
 
-    - name: Retrieve saved Wazuh manager Docker image
+    - name: Retrieve saved Cyb3rhq manager Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-manager
 
-    - name: Retrieve saved Wazuh indexer Docker image
+    - name: Retrieve saved Cyb3rhq indexer Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-indexer
 
-    - name: Retrieve saved Wazuh Cert Tool Docker image
+    - name: Retrieve saved Cyb3rhq Cert Tool Docker image
       uses: actions/download-artifact@v3
       with:
         name: docker-artifact-cert-tool
 
     - name: Docker load
       run: |
-        docker load --input ./wazuh-indexer.tar
-        docker load --input ./wazuh-dashboard.tar
-        docker load --input ./wazuh-manager.tar
-        docker load --input ./wazuh-cert-tool.tar
-        rm -rf wazuh-manager.tar wazuh-indexer.tar wazuh-dashboard.tar wazuh-cert-tool.tar
+        docker load --input ./cyb3rhq-indexer.tar
+        docker load --input ./cyb3rhq-dashboard.tar
+        docker load --input ./cyb3rhq-manager.tar
+        docker load --input ./cyb3rhq-cert-tool.tar
+        rm -rf cyb3rhq-manager.tar cyb3rhq-indexer.tar cyb3rhq-dashboard.tar cyb3rhq-cert-tool.tar
 
     - name: Create multi node certficates
       run: docker-compose -f multi-node/generate-certs.yml run --rm generator
@@ -261,11 +261,11 @@ jobs:
     - name: Start multi node stack
       run: docker-compose -f multi-node/docker-compose.yml up -d
 
-    - name: Check Wazuh indexer start
+    - name: Check Cyb3rhq indexer start
       run: |
        until [[ `curl -XGET "https://0.0.0.0:9200/_cluster/health" -u admin:SecretPassword -k -s | grep green | wc -l`  -eq 1 ]]
        do
-         echo 'Waiting for Wazuh indexer start'
+         echo 'Waiting for Cyb3rhq indexer start'
          free -m
          df -h
          sleep 120
@@ -286,77 +286,77 @@ jobs:
         exit 1
        fi
 
-    - name: Check Wazuh indexer nodes
+    - name: Check Cyb3rhq indexer nodes
       run: |
        nodes="`curl -XGET "https://0.0.0.0:9200/_cat/nodes" -u admin:SecretPassword -k -s | grep -E "indexer" | wc -l`"
        if [[ $nodes -eq 3 ]]; then
-        echo "Wazuh indexer nodes: ${nodes}"
+        echo "Cyb3rhq indexer nodes: ${nodes}"
        else
-        echo "Wazuh indexer nodes: ${nodes}"
+        echo "Cyb3rhq indexer nodes: ${nodes}"
         exit 1
        fi
 
-    - name: Check documents into wazuh-alerts index
+    - name: Check documents into cyb3rhq-alerts index
       run: |
-       until [[ $(``curl -XGET "https://0.0.0.0:9200/wazuh-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"``)  -gt 0 ]]
+       until [[ $(``curl -XGET "https://0.0.0.0:9200/cyb3rhq-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"``)  -gt 0 ]]
        do
-         echo 'Waiting for Wazuh indexer events'
+         echo 'Waiting for Cyb3rhq indexer events'
          free -m
          df -h
          sleep 10
        done
-       docs="`curl -XGET "https://0.0.0.0:9200/wazuh-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"`"
+       docs="`curl -XGET "https://0.0.0.0:9200/cyb3rhq-alerts*/_count" -u admin:SecretPassword -k -s | jq -r ".count"`"
        if [[ $docs -gt 0 ]]; then
-        echo "wazuh-alerts index documents: ${docs}"
+        echo "cyb3rhq-alerts index documents: ${docs}"
        else
-        echo "wazuh-alerts index documents: ${docs}"
+        echo "cyb3rhq-alerts index documents: ${docs}"
         exit 1
        fi
 
-    - name: Check Wazuh templates
+    - name: Check Cyb3rhq templates
       run: |
-       qty_templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep "wazuh" | wc -l`"
-       templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep "wazuh"`"
+       qty_templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep "cyb3rhq" | wc -l`"
+       templates="`curl -XGET "https://0.0.0.0:9200/_cat/templates" -u admin:SecretPassword -k -s | grep "cyb3rhq"`"
        if [[ $qty_templates -gt 3 ]]; then
-        echo "wazuh templates:"
+        echo "cyb3rhq templates:"
         echo "${templates}"
        else
-        echo "wazuh templates:"
+        echo "cyb3rhq templates:"
         echo "${templates}"
         exit 1
        fi
 
-    - name: Check Wazuh manager start
+    - name: Check Cyb3rhq manager start
       run: |
         services="`curl -k -s -X GET "https://0.0.0.0:55000/manager/status?pretty=true" -H  "Authorization: Bearer ${{env.TOKEN}}" | jq -r .data.affected_items | grep running | wc -l`"
         if [[ $services -gt 10 ]]; then
-          echo "Wazuh Manager Services: ${services}"
+          echo "Cyb3rhq Manager Services: ${services}"
           echo "OK"
         else
-          echo "Wazuh indexer nodes: ${nodes}"
+          echo "Cyb3rhq indexer nodes: ${nodes}"
           curl -k -s -X GET "https://0.0.0.0:55000/manager/status?pretty=true" -H  "Authorization: Bearer ${{env.TOKEN}}" | jq -r .data.affected_items
           exit 1
         fi
         nodes=$(curl -k -s -X GET "https://0.0.0.0:55000/cluster/nodes" -H "Authorization: Bearer ${{env.TOKEN}}" | jq -r ".data.affected_items[].name" | wc -l)
         if [[ $nodes -eq 2 ]]; then
-         echo "Wazuh manager nodes: ${nodes}"
+         echo "Cyb3rhq manager nodes: ${nodes}"
         else
-         echo "Wazuh manager nodes: ${nodes}"
+         echo "Cyb3rhq manager nodes: ${nodes}"
          exit 1
         fi
       env:
-        TOKEN: $(curl -s -u wazuh-wui:MyS3cr37P450r.*- -k -X GET "https://0.0.0.0:55000/security/user/authenticate?raw=true")
+        TOKEN: $(curl -s -u cyb3rhq-wui:MyS3cr37P450r.*- -k -X GET "https://0.0.0.0:55000/security/user/authenticate?raw=true")
 
     - name: Check filebeat output
       run: ./.github/multi-node-filebeat-check.sh
 
-    - name: Check Wazuh dashboard service URL
+    - name: Check Cyb3rhq dashboard service URL
       run: |
        status=$(curl -XGET --silent  https://0.0.0.0:443/app/status -k -u admin:SecretPassword -I | grep -E "^HTTP" | awk  '{print $2}')
        if [[ $status -eq 200 ]]; then
-        echo "Wazuh dashboard status: ${status}"
+        echo "Cyb3rhq dashboard status: ${status}"
        else
-        echo "Wazuh dashboard status: ${status}"
+        echo "Cyb3rhq dashboard status: ${status}"
         exit 1
        fi
 
